@@ -43,10 +43,10 @@ public class JwtTokenProvider {
         secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
     }
 
-    public TokenResponse createTokens(String userPK) {
+    public TokenResponse createTokens(String userPK, String email) {
 
-        String accessToken = createToken(userPK, Role.ROLE_USER, "access", accessTokenValidTime);
-        String refreshToken = createToken(userPK, Role.ROLE_USER, "refresh", refreshTokenValidTime);
+        String accessToken = createToken(userPK, Role.ROLE_USER, "access", accessTokenValidTime, email);
+        String refreshToken = createToken(userPK, Role.ROLE_USER, "refresh", refreshTokenValidTime, email);
 
         refreshTokenRepository.save(RefreshToken.builder()
                 .refreshToken(refreshToken)
@@ -59,10 +59,11 @@ public class JwtTokenProvider {
                 .build();
     }
 
-    public String createToken(String userPK, Role roles, String type, Long exp) {
+    public String createToken(String userPK, Role roles, String type, Long exp, String email) {
         Claims claims = Jwts.claims().setSubject(userPK);
         claims.put("type", type);
         claims.put("roles", roles);
+        claims.put("email", email);
         Date now =new Date();
 
         return Jwts.builder()
@@ -82,6 +83,11 @@ public class JwtTokenProvider {
 
     public String getUserPK(String token) {
         return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
+    }
+
+    public Claims parseToken(String token) {
+        Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();
+        return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();
     }
 
     public String resolveToken(HttpServletRequest request) {

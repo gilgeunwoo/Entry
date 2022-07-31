@@ -1,12 +1,12 @@
 package com.example.entry.domain.user.domain;
 
 
+import com.example.entry.domain.submit.domain.Application;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -18,6 +18,7 @@ public class User implements UserDetails {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
+    @Column(name = "USER_ID")
     private Long id;
 
     @Column
@@ -26,17 +27,26 @@ public class User implements UserDetails {
     private String email;
     @Column
     private String password;
-
     @Column
     private Role role;
 
+    @OneToOne
+    @JoinColumn(name = "APP_ID")
+    private Application application;
+
+
+
     @Builder
-    public User(String username, String email, String password, Role role) {
+    public User(Long id, String username, String email, String password, boolean apply, Role role, Application application) {
+        this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
+        this.apply = apply;
         this.role = role;
+        this.application = application;
     }
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

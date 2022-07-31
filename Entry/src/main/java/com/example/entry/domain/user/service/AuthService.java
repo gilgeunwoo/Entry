@@ -39,7 +39,7 @@ public class AuthService {
         if (!passwordEncoder.matches(signInRequest.getPassword(), user.getPassword()))
             throw InvalidPasswordException.EXCEPTION;
 
-        return jwtTokenProvider.createTokens(user.getUsername());
+        return jwtTokenProvider.createTokens(user.getUsername(), user.getEmail());
     }
 
 }

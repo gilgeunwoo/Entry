@@ -9,6 +9,6 @@ public class InvalidPasswordException extends CustomException {
             new InvalidPasswordException();
 
     private InvalidPasswordException() {
-        super(ErrorCode.USER_NOT_FOUND);
+        super(ErrorCode.INVALID_PASSWORD);
     }
 }

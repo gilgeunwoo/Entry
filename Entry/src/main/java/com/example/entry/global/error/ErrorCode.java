@@ -13,6 +13,7 @@ public enum ErrorCode {
     EXPIRED_REFRESH_TOKEN(401,"Expired Refresh Token"),
     INVALID_TOKEN(401,"Invalid Token"),
     INCORRECT_TOKEN(500,"Incorrect Token"),
+    APPLICATION_NOT_FOUND(404, "application not found"),
 
     INTERNAL_SERVER_ERROR(500, "Internal Server Error");
 
