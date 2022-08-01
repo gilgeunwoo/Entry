@@ -19,6 +19,9 @@ public class Application {
 
     @Column
     private boolean apply;
+
+    @Column
+    private String field;
     @Column
     private String username;
 
@@ -28,20 +31,24 @@ public class Application {
     @Column
     private String notionUrl;
 
-    @OneToOne(mappedBy = "application")
+    @OneToOne
+    @JoinColumn(name = "USER_ID")
     private User user;
 
     @Builder
-    public Application(Long id, boolean apply, String username, String githubUrl, String notionUrl, User user) {
+    public Application(Long id, boolean apply, String field, String username, String githubUrl, String notionUrl, User user) {
         this.id = id;
         this.apply = apply;
+        this.field = field;
         this.username = username;
         this.githubUrl = githubUrl;
         this.notionUrl = notionUrl;
         this.user = user;
     }
 
-    public void setApply(boolean apply) {
-        this.apply = apply;
+    public Application submitAssignment(String githubUrl, String notionUrl) {
+        this.githubUrl = githubUrl;
+        this.notionUrl = notionUrl;
+        return this;
     }
 }

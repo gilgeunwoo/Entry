@@ -13,9 +13,23 @@ spring:
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
   redis:
     host: localhost
     port: 6379
+  mail:
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: 'true'
+          auth: 'true'
+    host: smtp.gmail.com
+    port: 587
+    username: kesksjxhx@gmail.com
+    password: aqlsqiwhowdpkkio
+    default-encoding: UTF-8
+    transport:
+      protocol: smtp
 server:
   port: 7070

@@ -76,7 +76,7 @@ public class JwtTokenProvider {
 
 
     public Authentication getAuthentication(String token) {
-        UserDetails userDetails = userDetailsService.loadUserByUsername(this.getUserPK(token));
+        UserDetails userDetails = userDetailsService.loadUserByUsername(this.getEmail(token));
 
         return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
     }
@@ -85,9 +85,8 @@ public class JwtTokenProvider {
         return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
     }
 
-    public Claims parseToken(String token) {
-        Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();
-        return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();
+    public String getEmail(String token) {
+        return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().get("email", String.class);
     }
 
     public String resolveToken(HttpServletRequest request) {

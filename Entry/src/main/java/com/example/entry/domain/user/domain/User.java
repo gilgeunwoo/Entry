@@ -30,19 +30,17 @@ public class User implements UserDetails {
     @Column
     private Role role;
 
-    @OneToOne
-    @JoinColumn(name = "APP_ID")
+    @OneToOne(mappedBy = "application")
     private Application application;
 
 
 
     @Builder
-    public User(Long id, String username, String email, String password, boolean apply, Role role, Application application) {
+    public User(Long id, String username, String email, String password, Role role, Application application) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
-        this.apply = apply;
         this.role = role;
         this.application = application;
     }
