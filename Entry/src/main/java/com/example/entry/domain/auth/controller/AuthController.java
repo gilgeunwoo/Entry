@@ -1,9 +1,9 @@
-package com.example.entry.domain.user.controller;
+package com.example.entry.domain.auth.controller;
 
-import com.example.entry.domain.user.controller.dto.request.SignInRequest;
-import com.example.entry.domain.user.controller.dto.request.SignUpRequest;
-import com.example.entry.domain.user.controller.dto.response.TokenResponse;
-import com.example.entry.domain.user.service.AuthService;
+import com.example.entry.domain.auth.controller.dto.request.SignInRequest;
+import com.example.entry.domain.auth.controller.dto.request.SignUpRequest;
+import com.example.entry.domain.auth.controller.dto.response.TokenResponse;
+import com.example.entry.domain.auth.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

@@ -34,6 +34,6 @@ public class SubmitController {
     @PreAuthorize("hasRole('USER')")
     @PostMapping("/assignment")
     public void submitAssignment(@RequestHeader("Authorization") String token, @RequestBody SubmitAssignmentRequest submitAssignmentRequest) {
-        submitService.SubmitAssignment(token, submitAssignmentRequest);
+        submitService.submitAssignment(token, submitAssignmentRequest);
     }
 }

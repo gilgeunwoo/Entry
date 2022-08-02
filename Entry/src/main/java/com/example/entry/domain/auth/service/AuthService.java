@@ -1,14 +1,14 @@
-package com.example.entry.domain.user.service;
+package com.example.entry.domain.auth.service;
 
 
-import com.example.entry.domain.user.controller.dto.request.SignInRequest;
-import com.example.entry.domain.user.controller.dto.response.TokenResponse;
-import com.example.entry.domain.user.domain.Role;
+import com.example.entry.domain.auth.controller.dto.request.SignInRequest;
+import com.example.entry.domain.auth.controller.dto.response.TokenResponse;
+import com.example.entry.domain.auth.domain.types.Role;
 import com.example.entry.domain.user.domain.User;
 import com.example.entry.domain.user.domain.repository.UserRepository;
-import com.example.entry.domain.user.controller.dto.request.SignUpRequest;
-import com.example.entry.domain.user.exception.InvalidPasswordException;
-import com.example.entry.domain.user.exception.UserNotFoundException;
+import com.example.entry.domain.auth.controller.dto.request.SignUpRequest;
+import com.example.entry.domain.auth.exception.InvalidPasswordException;
+import com.example.entry.domain.auth.exception.UserNotFoundException;
 import com.example.entry.global.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;

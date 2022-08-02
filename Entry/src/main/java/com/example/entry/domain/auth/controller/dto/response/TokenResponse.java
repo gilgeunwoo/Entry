@@ -1,4 +1,4 @@
-package com.example.entry.domain.user.controller.dto.response;
+package com.example.entry.domain.auth.controller.dto.response;
 
 import lombok.Builder;
 import lombok.Getter;

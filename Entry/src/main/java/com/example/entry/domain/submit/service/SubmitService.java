@@ -6,10 +6,9 @@ import com.example.entry.domain.submit.domain.repository.ApplicationRepository;
 import com.example.entry.domain.submit.exception.ApplicationNotFoundException;
 import com.example.entry.domain.user.domain.User;
 import com.example.entry.domain.user.domain.repository.UserRepository;
-import com.example.entry.domain.user.exception.UserNotFoundException;
+import com.example.entry.domain.auth.exception.UserNotFoundException;
 import com.example.entry.global.email.MailService;
 import com.example.entry.global.jwt.JwtTokenProvider;
-import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -27,13 +26,16 @@ public class SubmitService {
 
     private final MailService mailService;
 
-    public void SubmitAssignment(String token, SubmitAssignmentRequest submitAssignmentRequest) {
+    @Transactional
+    public void submitAssignment(String token, SubmitAssignmentRequest submitAssignmentRequest) {
         User user = userRepository.findByEmail(jwtTokenProvider.getEmail(token))
                 .orElseThrow(() -> UserNotFoundException.EXCEPTION);
         Application application = applicationRepository.findByUser(user)
                 .orElseThrow(() -> ApplicationNotFoundException.EXCEPTION);
-        application.submitAssignment(submitAssignmentRequest.getGithubUrl(),
-                submitAssignmentRequest.getNotionUrl());
+        application.submitAssignment(
+                submitAssignmentRequest.getGithubUrl(),
+                submitAssignmentRequest.getNotionUrl()
+        );
     }
 
     public void apply(String token, String field) {

@@ -1,15 +1,12 @@
-package com.example.entry.domain.user.controller.dto.request;
+package com.example.entry.domain.auth.controller.dto.request;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Getter
 @NoArgsConstructor
-public class SignUpRequest {
-
-    private String username;    
+@Getter
+public class SignInRequest {
 
     private String email;
-
     private String password;
 }

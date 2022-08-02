@@ -1,9 +1,9 @@
 package com.example.entry.global.jwt;
 
-import com.example.entry.domain.user.controller.dto.response.TokenResponse;
-import com.example.entry.domain.user.domain.RefreshToken;
-import com.example.entry.domain.user.domain.Role;
-import com.example.entry.domain.user.domain.repository.RefreshTokenRepository;
+import com.example.entry.domain.auth.controller.dto.response.TokenResponse;
+import com.example.entry.domain.auth.domain.RefreshToken;
+import com.example.entry.domain.auth.domain.types.Role;
+import com.example.entry.domain.auth.domain.repository.RefreshTokenRepository;
 import com.example.entry.global.exception.ExpiredRefreshTokenException;
 import com.example.entry.global.exception.IncorrectTokenException;
 import com.example.entry.global.exception.InvalidTokenException;

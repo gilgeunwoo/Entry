@@ -46,9 +46,8 @@ public class Application {
         this.user = user;
     }
 
-    public Application submitAssignment(String githubUrl, String notionUrl) {
+    public void submitAssignment(String githubUrl, String notionUrl) {
         this.githubUrl = githubUrl;
         this.notionUrl = notionUrl;
-        return this;
     }
 }

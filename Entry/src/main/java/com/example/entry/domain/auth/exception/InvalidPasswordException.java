@@ -1,4 +1,4 @@
-package com.example.entry.domain.user.exception;
+package com.example.entry.domain.auth.exception;
 
 import com.example.entry.global.exception.CustomException;
 import com.example.entry.global.error.ErrorCode;

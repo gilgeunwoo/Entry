@@ -1,7 +1,7 @@
 package com.example.entry.domain.user.domain;
 
 
-import com.example.entry.domain.submit.domain.Application;
+import com.example.entry.domain.auth.domain.types.Role;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
