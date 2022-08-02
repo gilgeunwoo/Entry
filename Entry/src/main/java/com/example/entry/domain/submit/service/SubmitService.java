@@ -13,6 +13,8 @@ import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 
 @RequiredArgsConstructor
 @Service
@@ -47,6 +49,7 @@ public class SubmitService {
         );
     }
 
+    @Transactional
     public void applyBackEnd(String token) {
         apply(token, "back_end");
         mailService.simpleSend(jwtTokenProvider.getEmail(token),
@@ -56,6 +59,7 @@ public class SubmitService {
                 jwtTokenProvider.getUserPK(token) + "님, Entry DSM 1학년 신입부원 모집지원이 정상적으로 완료되었습니다.");
     }
 
+    @Transactional
     public void applyFrontEnd(String token) {
         apply(token, "front_end");
         mailService.simpleSend(jwtTokenProvider.getEmail(token),
@@ -65,6 +69,7 @@ public class SubmitService {
                 jwtTokenProvider.getUserPK(token) + "님, Entry DSM 1학년 신입부원 모집지원이 정상적으로 완료되었습니다.");
     }
 
+    @Transactional
     public void applyDesign(String token) {
         apply(token, "design");
         mailService.simpleSend(jwtTokenProvider.getEmail(token),
