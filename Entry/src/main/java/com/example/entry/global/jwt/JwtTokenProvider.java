@@ -43,8 +43,22 @@ public class JwtTokenProvider {
         secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
     }
 
-    public TokenResponse createTokens(String userPK, String email) {
 
+    public TokenResponse createAdminTokens(String userPK) {
+        String accessToken = createToken(userPK, Role.ROLE_ADMIN, "access", accessTokenValidTime, "어드민 계정");
+        String refreshToken = createToken(userPK, Role.ROLE_ADMIN, "refresh", refreshTokenValidTime, "어드민 계정");
+
+        refreshTokenRepository.save(RefreshToken.builder()
+                .refreshToken(refreshToken)
+                .userName(userPK)
+                .refreshExpiration(refreshTokenValidTime)
+                .build());
+        return TokenResponse.builder()
+                .accessToken(accessToken)
+                .refreshToken(refreshToken)
+                .build();
+    }
+    public TokenResponse createTokens(String userPK, String email) {
         String accessToken = createToken(userPK, Role.ROLE_USER, "access", accessTokenValidTime, email);
         String refreshToken = createToken(userPK, Role.ROLE_USER, "refresh", refreshTokenValidTime, email);
 
