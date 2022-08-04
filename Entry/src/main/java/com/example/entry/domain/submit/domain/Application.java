@@ -31,23 +31,31 @@ public class Application {
     @Column
     private String notionUrl;
 
+    @Column
+    private boolean pass;
+
     @OneToOne
     @JoinColumn(name = "USER_ID")
     private User user;
 
     @Builder
-    public Application(Long id, boolean apply, String field, String username, String githubUrl, String notionUrl, User user) {
+    public Application(Long id, boolean apply, String field, String username, String githubUrl, String notionUrl, boolean pass, User user) {
         this.id = id;
         this.apply = apply;
         this.field = field;
         this.username = username;
         this.githubUrl = githubUrl;
         this.notionUrl = notionUrl;
+        this.pass = pass;
         this.user = user;
     }
 
     public void submitAssignment(String githubUrl, String notionUrl) {
         this.githubUrl = githubUrl;
         this.notionUrl = notionUrl;
+    }
+
+    public void setPass(boolean pass) {
+        this.pass = pass;
     }
 }

@@ -15,12 +15,15 @@ public class CustomUserDetailService implements UserDetailsService {
     private final UserRepository userRepository;
     private final AdminRepository adminRepository;
 
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         try {
             return userRepository.findByUsername(username)
+                    .map(CustomUserDetails::new)
                     .orElseThrow(() -> new UsernameNotFoundException("사용자를 찾을 수 없습니다."));
         } catch (UsernameNotFoundException e) {
             return adminRepository.findByAdminId(username)
+                    .map(CustomAdminDetails::new)
                     .orElseThrow(() -> new UsernameNotFoundException("사용자를 찾을 수 없습니다."));
         }
     }

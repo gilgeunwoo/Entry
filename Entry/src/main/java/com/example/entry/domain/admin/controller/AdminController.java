@@ -29,5 +29,15 @@ public class AdminController {
         adminService.sendScheduleEmail(scheduleRequest, username);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping("/pass/{username}")
+    public void sendPass(@PathVariable String username) {
+        adminService.sendPassEmail(username);
+    }
 
+    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping("/fail/{username}")
+    public void sendFail(@PathVariable String username) {
+        adminService.sendFailEmail(username);
+    }
 }
