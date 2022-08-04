@@ -55,8 +55,8 @@ public class SubmitService {
     public void applyBackEnd(String token) {
         apply(token, "back_end");
         mailService.simpleSend(jwtTokenProvider.getEmail(token),
-                jwtTokenProvider.getUserPK(token) + "님은 Entry DSM 백엔드 분야에 지원하셨습니다." +
-                        "과제는 본 링크를 참고해주세요." +
+                jwtTokenProvider.getUserPK(token) + "님은 Entry DSM 백엔드 분야에 지원하셨습니다.\n" +
+                        "과제는 본 링크를 참고해주세요.\n" +
                         "https://www.notion.so/entry-9b4fa6263106459ab449616af51c3e87#bc7fa95f9c3041d48ecc5ecdf33d8430",
                 jwtTokenProvider.getUserPK(token) + "님, Entry DSM 1학년 신입부원 모집지원이 정상적으로 완료되었습니다.");
     }

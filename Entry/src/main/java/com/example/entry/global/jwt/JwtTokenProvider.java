@@ -90,8 +90,7 @@ public class JwtTokenProvider {
 
 
     public Authentication getAuthentication(String token) {
-        UserDetails userDetails = userDetailsService.loadUserByUsername(this.getEmail(token));
-
+        UserDetails userDetails = userDetailsService.loadUserByUsername(this.getUserPK(token));
         return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
     }
 
@@ -116,9 +115,6 @@ public class JwtTokenProvider {
         }
     }
 
-    public String getSecretKey() {
-        return secretKey;
-    }
 
     public boolean isRefreshToken(String refreshToken) {
         try {
