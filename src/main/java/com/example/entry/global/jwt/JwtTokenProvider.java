@@ -65,6 +65,7 @@ public class JwtTokenProvider {
         refreshTokenRepository.save(RefreshToken.builder()
                 .refreshToken(refreshToken)
                 .userName(userPK)
+                .email(email)
                 .refreshExpiration(refreshTokenValidTime)
                 .build());
         return TokenResponse.builder()

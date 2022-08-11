@@ -20,19 +20,23 @@ public class RefreshToken implements Serializable {
     private String userName;
 
     @Indexed
+    private String email;
+    @Indexed
     private String refreshToken;
 
     @TimeToLive
     private Long refreshExpiration;
 
     @Builder
-    public RefreshToken(String userName, String refreshToken, Long refreshExpiration) {
+    public RefreshToken(String userName, String email, String refreshToken, Long refreshExpiration) {
         this.userName = userName;
+        this.email = email;
         this.refreshToken = refreshToken;
         this.refreshExpiration = refreshExpiration;
     }
 
-    public RefreshToken (Long RefreshExp) {
+    public RefreshToken update(Long RefreshExp) {
         this.refreshExpiration = RefreshExp;
+        return this;
     }
 }

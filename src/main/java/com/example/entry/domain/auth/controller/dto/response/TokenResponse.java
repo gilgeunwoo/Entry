@@ -1,5 +1,6 @@
 package com.example.entry.domain.auth.controller.dto.response;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 

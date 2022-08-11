@@ -5,10 +5,7 @@ import com.example.entry.domain.auth.controller.dto.request.SignUpRequest;
 import com.example.entry.domain.auth.controller.dto.response.TokenResponse;
 import com.example.entry.domain.auth.service.AuthService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
@@ -25,5 +22,10 @@ public class AuthController {
     @PostMapping("/signin")
     public TokenResponse signin(@RequestBody SignInRequest signInRequest) {
         return authService.signIn(signInRequest);
+    }
+
+    @PatchMapping("/reissue")
+    public TokenResponse reissue(@RequestHeader("refreshToken") String refreshToken) {
+        return authService.reissue(refreshToken);
     }
 }
