@@ -9,10 +9,13 @@ import com.example.entry.domain.user.domain.repository.UserRepository;
 import com.example.entry.domain.auth.exception.UserNotFoundException;
 import com.example.entry.global.email.MailService;
 import com.example.entry.global.jwt.JwtTokenProvider;
+import com.example.entry.global.s3.S3Service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
+import java.io.IOException;
 
 
 @RequiredArgsConstructor
@@ -20,10 +23,9 @@ import javax.transaction.Transactional;
 public class SubmitService {
 
     private final UserRepository userRepository;
-
     private final JwtTokenProvider jwtTokenProvider;
     private final ApplicationRepository applicationRepository;
-
+    private final S3Service s3Service;
     private final MailService mailService;
 
     @Transactional
@@ -36,6 +38,19 @@ public class SubmitService {
                 submitAssignmentRequest.getGithubUrl(),
                 submitAssignmentRequest.getNotionUrl()
         );
+    }
+
+    @Transactional
+    public String submitERD(String token, MultipartFile image) throws IOException {
+        User user = userRepository.findByEmail(jwtTokenProvider.getEmail(token))
+                .orElseThrow(() -> UserNotFoundException.EXCEPTION);
+        Application application = applicationRepository.findByUser(user)
+                .orElseThrow(() -> ApplicationNotFoundException.EXCEPTION);
+
+        String imageUrl = s3Service.upload(image);
+        application.submitERD(imageUrl);
+
+        return imageUrl;
     }
 
     public void apply(String token, String field) {

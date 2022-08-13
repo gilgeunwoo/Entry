@@ -14,6 +14,7 @@ public class UserController {
 
     private final UserService userService;
 
+
     @PreAuthorize("hasRole('USER')")
     @PutMapping
     public void userUpdate(@RequestHeader("Authorization") String token, @RequestBody UserUpdateRequest userUpdateRequest) {

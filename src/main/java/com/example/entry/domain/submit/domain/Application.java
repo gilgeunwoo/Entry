@@ -32,6 +32,9 @@ public class Application {
     private String notionUrl;
 
     @Column
+    private String ERDUrl;
+
+    @Column
     private boolean pass;
 
     @OneToOne
@@ -39,13 +42,14 @@ public class Application {
     private User user;
 
     @Builder
-    public Application(Long id, boolean apply, String field, String username, String githubUrl, String notionUrl, boolean pass, User user) {
+    public Application(Long id, boolean apply, String field, String username, String githubUrl, String notionUrl, String erdUrl, boolean pass, User user) {
         this.id = id;
         this.apply = apply;
         this.field = field;
         this.username = username;
         this.githubUrl = githubUrl;
         this.notionUrl = notionUrl;
+        ERDUrl = erdUrl;
         this.pass = pass;
         this.user = user;
     }
@@ -53,6 +57,10 @@ public class Application {
     public void submitAssignment(String githubUrl, String notionUrl) {
         this.githubUrl = githubUrl;
         this.notionUrl = notionUrl;
+    }
+
+    public void submitERD(String ERDUrl) {
+        this.ERDUrl = ERDUrl;
     }
 
     public void setPass(boolean pass) {
